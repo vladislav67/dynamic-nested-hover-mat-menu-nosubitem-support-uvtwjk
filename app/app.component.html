@@ -1,0 +1,24 @@
+<ng-container *ngFor="let item of navItems">
+  <!-- Handle branch node buttons here -->
+  <ng-container *ngIf="item.subItems && item.subItems.length > 0">
+    <button
+      mat-raised-button
+      color="primary"
+      [matMenuTriggerFor]="menu.childMenu"
+      #trigger="matMenuTrigger"
+      #menuTrigger="matMenuTrigger"
+      (mouseover)="menuTrigger.openMenu()"
+    >
+      {{ item.text }}
+      <mat-icon>expand_more</mat-icon>
+    </button>
+    <app-menu-item #menu [items]="item.subItems"></app-menu-item>
+  </ng-container>
+  <!-- Leaf node buttons here -->
+  <ng-container *ngIf="!item.subItems || item.subItems.length === 0">
+    <button mat-raised-button color="primary">
+      {{ item.text }}
+    </button>
+    <app-menu-item #menu [items]="item.subItems"></app-menu-item>
+  </ng-container>
+</ng-container>
